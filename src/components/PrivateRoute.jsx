@@ -6,10 +6,10 @@ const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
   if (!user) {
     return (
-      <Navigate
+      <Navigate replace={true}
         to="/auth/login"
         state={{
-          return_url: location.pathname,
+          return_url: location.pathname +location.search,
         }}
       />
     );
