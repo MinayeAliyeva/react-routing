@@ -26,12 +26,7 @@ function App() {
             <Route path="post/:id/:url" element={<Post />} />
             <Route path="*" element={<Blog404 />} />
           </Route>
-        </Route>
-
-        <Route path="/auth" element={<AuthLayout />}>
-          <Route path="login" element={<Login />} />
-        </Route>
-        <Route
+          <Route
           path="profile"
           element={
             <PrivateRoute>
@@ -39,6 +34,12 @@ function App() {
             </PrivateRoute>
           }
         />
+        </Route>
+
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="login" element={<Login />} />
+        </Route>
+
         <Route path="*" element={<Error />} />
       </Routes>
     </>
