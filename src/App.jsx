@@ -7,6 +7,8 @@ import {  NavLink } from "react-router-dom";
 import Post from "./pages/blog/Post";
 import Catagories  from "./pages/blog/Catagories";
 import Blog from "./pages/Blog";
+import Error from "./pages/Error";
+import Blog404 from "./pages/blog/Blog404";
 function App() {
   return (
     <>
@@ -36,8 +38,10 @@ function App() {
         <Route path="/blog" element={<BlogLayout />} >
           <Route index={true} element={<Blog/>}/>
           <Route path="catagories" element={<Catagories/>}/>
-          <Route path="post/:url" element={<Post/>}/>
+          <Route path="post/:id/:url" element={<Post/>}/>
+          <Route path="*" element={<Blog404/>}/> 
         </Route>
+        <Route path="*" element={<Error/>}/>
       </Routes>
     </>
   );
