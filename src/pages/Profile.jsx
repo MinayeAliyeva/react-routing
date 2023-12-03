@@ -1,14 +1,16 @@
 import React from "react";
 import { useAuth } from "../context/authcontext";
+import { Link } from "react-router-dom";
 const Profile = () => {
-  const { setUser } = useAuth();
+  const { setUser, user } = useAuth();
   const logOutHandle = () => {
     setUser(false);
   };
   return (
     <div>
-      Profile
-      <button onClick={logOutHandle}>Log Out</button>
+      Profile sayfasi <br />
+      {!user && <Link to="/auth/login">Giris yap</Link>}
+      {user && <button onClick={logOutHandle}>Log Out</button>}
     </div>
   );
 };

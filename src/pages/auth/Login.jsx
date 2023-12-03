@@ -13,9 +13,6 @@ const Login = () => {
     });
     navigate(location?.state?.return_url || "/",{
       replace :true,
-      state:{
-        name:'emin'
-      }
     })
   };
   return (

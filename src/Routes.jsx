@@ -12,66 +12,83 @@ import Login from "./pages/auth/Login";
 import AuthLayout from "./pages/auth/AuthLayout";
 import HomeLayoute from "./pages/HomeLayoute";
 
-
 const routes = [
   {
     path: "/",
     element: <HomeLayoute />,
+    name: "home",
     children: [
       {
+        name: "index",
         index: true,
         element: <Home />,
       },
       {
+        name: "contact",
         path: "contact",
         element: <Contact />,
+        // admin:true
       },
       {
+        name: "blog",
         path: "blog",
         element: <BlogLayout />,
+        auth: true,
         children: [
           {
+            name: "index",
             index: true,
             element: <Blog />,
           },
           {
+            name: "catagories",
             path: "catagories",
             element: <Catagories />,
           },
           {
+            name: "post",
             path: "post/:id/:url",
             element: <Post />,
           },
           {
+            name: "error",
             path: "*",
             element: <Blog404 />,
           },
         ],
       },
-      {
-        path: "profile",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
-      },
+      { name: "profile", path: "profile", element: <Profile />, auth: true },
     ],
   },
   {
+    name:"auth",
     path: "auth",
     element: <AuthLayout />,
     children: [
       {
+        name:"login",
         path: "login",
         element: <Login />,
       },
     ],
   },
   {
+    name:"error",
     path: "*",
     element: <Error />,
   },
 ];
 
-export default routes;
+const authMap = (routes) =>
+  routes.map((route) => {
+    if (route?.auth) {
+      console.log(route.element);
+      route.element = <PrivateRoute>{route.element}</PrivateRoute>;
+    }
+    if (route?.children) {
+      route.children = authMap(route.children);
+    }
+    return route;
+  });
+
+export default authMap(routes);
