@@ -2,8 +2,11 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
+import BlogLayout from "./pages/blog/BlogLayout";
+import {  NavLink } from "react-router-dom";
+import Post from "./pages/blog/Post";
+import Catagories  from "./pages/blog/Catagories";
 import Blog from "./pages/Blog";
-import { Link, NavLink } from "react-router-dom";
 function App() {
   return (
     <>
@@ -30,7 +33,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog" element={<BlogLayout />} >
+          <Route index={true} element={<Blog/>}/>
+          <Route path="catagories" element={<Catagories/>}/>
+          <Route path="post/:url" element={<Post/>}/>
+        </Route>
       </Routes>
     </>
   );
